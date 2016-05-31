@@ -27,6 +27,7 @@ namespace ZovTrade
     {
         private DbModel.tradeEntities db;
         private bool showDeletedDealers = false;
+        private bool exportAllDealers = false;
 
         public bool ShowDeletedDealers
         {
@@ -41,6 +42,13 @@ namespace ZovTrade
                 GetDealersTree();
             }
         }
+
+        public bool ExportAllDealers
+        {
+            get { return exportAllDealers; }
+            set { exportAllDealers = value; }
+        }
+
 
         public int TreeListFocusedId
         {
@@ -57,6 +65,7 @@ namespace ZovTrade
             }
             set { treeListFocusedId = value; }
         }
+
 
         //  private DbModel.tradeEntities dbTree = new tradeEntities(DbModel.Tools.TradeConnectionString(Properties.Settings.Default.barcodeCS.ToString()));
 
@@ -1043,10 +1052,14 @@ namespace ZovTrade
             try
             {
 
-
+                
+                //List<int> goodposstatus = ExportAllDealers ? new List<int> {1, 2, 3, 4, 5} : new List<int> { 3, 4, 5 };
                 List<int> goodposstatus = new List<int> { 3, 4, 5 };
 
-                var posList = db.Pos.OrderBy(x => x.Ruby_Id).Where(x => goodposstatus.Contains(x.StatusOfPos.ID) && (!x.Dealers.isDeleted | ShowDeletedDealers)).Select(x => new
+
+                var posList = db.Pos.OrderBy(x => x.Ruby_Id)
+                              .Where(x => (ExportAllDealers | goodposstatus.Contains(x.StatusOfPos.ID)) && (!x.Dealers.isDeleted | ShowDeletedDealers))
+                              .Select(x => new
                 {
                     id = x.Ruby_Id,
                     legalname = x.DealerLegalNames == null ? "" : x.DealerLegalNames.LegalName,
@@ -1339,6 +1352,11 @@ namespace ZovTrade
             toolStripMenuItemDeleteDealer.Visible = !currentDealer.isDeleted;
             toolStripMenuItemRestoreDealer.Visible = currentDealer.isDeleted;
            
+        }
+
+        private void barCheckItemExportAll_CheckedChanged(object sender, ItemClickEventArgs e)
+        {
+            ExportAllDealers = barCheckItemExportAll.Checked;
         }
 
     }

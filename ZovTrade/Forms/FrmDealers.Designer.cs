@@ -40,6 +40,7 @@
             this.barButtonShowDeleted = new DevExpress.XtraBars.BarCheckItem();
             this.barButtonDeleteDealer = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonRestoreDealer = new DevExpress.XtraBars.BarButtonItem();
+            this.barCheckItemExportAll = new DevExpress.XtraBars.BarCheckItem();
             this.btnReviews = new DevExpress.XtraBars.BarButtonItem();
             this.BtnPos = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItem1 = new DevExpress.XtraBars.BarStaticItem();
@@ -281,8 +282,9 @@
             this.barButtonDeleteDealer,
             this.barButtonItem15,
             this.barButtonShowDeleted,
-            this.barButtonRestoreDealer});
-            this.barManager1.MaxItemId = 37;
+            this.barButtonRestoreDealer,
+            this.barCheckItemExportAll});
+            this.barManager1.MaxItemId = 38;
             this.barManager1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemTextEdit1});
             this.barManager1.StatusBar = this.bar3;
@@ -321,7 +323,8 @@
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItem5),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonShowDeleted, true),
             new DevExpress.XtraBars.LinkPersistInfo(this.barButtonDeleteDealer),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonRestoreDealer)});
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonRestoreDealer),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barCheckItemExportAll, true)});
             this.barSubItem1.Name = "barSubItem1";
             this.barSubItem1.Popup += new System.EventHandler(this.barSubItem1_Popup);
             // 
@@ -364,6 +367,13 @@
             this.barButtonRestoreDealer.Caption = "Восстановить дилера";
             this.barButtonRestoreDealer.Id = 36;
             this.barButtonRestoreDealer.Name = "barButtonRestoreDealer";
+            // 
+            // barCheckItemExportAll
+            // 
+            this.barCheckItemExportAll.Caption = "Выгрузить всех";
+            this.barCheckItemExportAll.Id = 37;
+            this.barCheckItemExportAll.Name = "barCheckItemExportAll";
+            this.barCheckItemExportAll.CheckedChanged += new DevExpress.XtraBars.ItemClickEventHandler(this.barCheckItemExportAll_CheckedChanged);
             // 
             // btnReviews
             // 
@@ -1790,5 +1800,6 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemRestoreDealer;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit;
         private DevExpress.XtraBars.BarButtonItem barButtonRestoreDealer;
+        private DevExpress.XtraBars.BarCheckItem barCheckItemExportAll;
     }
 }
